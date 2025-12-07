@@ -22,7 +22,7 @@ public class Timetable {
 
     public List<TrainingSession> getTrainingSessionsForDayAndTime(DayOfWeek dayOfWeek, TimeOfDay timeOfDay) {
         //как реализовать, тоже непонятно, но сложность должна быть О(1)
-        TreeMap <TimeOfDay, ArrayList<TrainingSession>> trainingSessionsForDay = timetable.get(dayOfWeek);
+        TreeMap<TimeOfDay, ArrayList<TrainingSession>> trainingSessionsForDay = timetable.get(dayOfWeek);
         if (trainingSessionsForDay == null) return Collections.emptyList();
         if (trainingSessionsForDay.get(timeOfDay) == null) return Collections.emptyList();
         return trainingSessionsForDay.get(timeOfDay);
