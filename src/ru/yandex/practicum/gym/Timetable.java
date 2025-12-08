@@ -15,13 +15,23 @@ public class Timetable {
         timetable.get(day).get(time).add(trainingSession);
     }
 
-    public TreeMap<TimeOfDay, ArrayList<TrainingSession>> getTrainingSessionsForDay(DayOfWeek dayOfWeek) {
-        //как реализовать, тоже непонятно, но сложность должна быть О(1)
-    return timetable.getOrDefault(dayOfWeek, new TreeMap<>());
+    public List<TrainingSession> getTrainingSessionsForDay(DayOfWeek dayOfWeek) {
+        TreeMap<TimeOfDay, ArrayList<TrainingSession>> trainingsForDay = timetable.get(dayOfWeek);
+
+        if (trainingsForDay == null) {
+            return Collections.emptyList();
+        }
+
+        List<TrainingSession> trainingSessionsForDay = new ArrayList<>();
+
+        for (List<TrainingSession> sessionsAtTime : trainingsForDay.values()) {
+            trainingSessionsForDay.addAll(sessionsAtTime);
+        }
+        return trainingSessionsForDay;
+
     }
 
     public List<TrainingSession> getTrainingSessionsForDayAndTime(DayOfWeek dayOfWeek, TimeOfDay timeOfDay) {
-        //как реализовать, тоже непонятно, но сложность должна быть О(1)
         TreeMap<TimeOfDay, ArrayList<TrainingSession>> trainingSessionsForDay = timetable.get(dayOfWeek);
         if (trainingSessionsForDay == null) return Collections.emptyList();
         if (trainingSessionsForDay.get(timeOfDay) == null) return Collections.emptyList();
